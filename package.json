@@ -5,8 +5,8 @@
   "author": "Byron Ruth",
   "license": "MIT",
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "serve": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --no-info"
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --colors --no-info --history-api-fallback",
+    "build": "./node_modules/webpack/bin/webpack.js"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",
