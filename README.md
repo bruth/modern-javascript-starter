@@ -184,6 +184,41 @@ npm install --save react-router
 #### Example
 
 
+### Fetch Polyfill
+
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is a [new standard](https://fetch.spec.whatwg.org/) for requests and responses in the browser.
+
+Currently, Chrome and Firefox support the new API, but IE and Safari do not. This is a polyfill that can be implicitly added through a Webpack loader.
+
+#### Install
+
+```
+# For webpack
+npm install --save-dev \
+    exports-loader \
+    imports-loader
+
+npm install --save whatwg-fetch
+```
+
+#### Setup
+
+Make the following changes to the `webpack.config.babel.js` file.
+
+```js
+// Ensure webpack is imported.
+import webpack from 'webpack'
+
+// Add this plugins option in the configuration object.
+plugins: [
+    new webpack.ProvidePlugin({
+       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+       // other polyfills can be added here as well
+    })
+    // other plugins..
+]
+```
+
 ## Credits
 
 - https://robots.thoughtbot.com/setting-up-webpack-for-react-and-hot-module-replacement
