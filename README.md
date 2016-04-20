@@ -43,6 +43,7 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
     - [React](#react)
     - [Redux](#redux)
     - [React Router](#react-router)
+    - [CSS Bundling](#css-bundling)
 
 ### General
 
@@ -268,6 +269,7 @@ npm install --save \
 
 There are several parts to React Router, so it is recommended to read through the documentation available here: https://github.com/reactjs/react-router/tree/master/docs#table-of-contents
 
+[](#css-bundling)
 #### CSS Bundling
 
 With Webpack, it's possible to bundle separate stylesheets together into a single
