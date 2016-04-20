@@ -42,6 +42,7 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
 - [Libraries](#libraries)
     - [React](#react)
     - [Redux](#redux)
+    - [React Router](#react-router)
 
 ### General
 
@@ -245,7 +246,7 @@ npm install --save \
 
 ##### Example
 
-There are several parts to Redux, so it recommended to read through the documentation available at http://redux.js.org/.
+There are several parts to Redux, so it is recommended to read through the documentation available here: http://redux.js.org/.
 
 ##### Other
 
@@ -253,13 +254,16 @@ There are several parts to Redux, so it recommended to read through the document
 
 #### React Router
 
+[React Router](https://github.com/reactjs/react-router) is a routing library for React.
+
 ##### Install
 
 ```
-npm install --save react-router
+npm install --save \
+    react-router \
+    react-router-redux
 ```
 
 ##### Example
 
-```js
-```
+There are several parts to React Router, so it is recommended to read through the documentation available here: https://github.com/reactjs/react-router/tree/master/docs#table-of-contents
