@@ -32,17 +32,16 @@ Open a Web browser to [http://localhost:8080](http://localhost:8080). Open the d
 
 By default, this starter kit comes which no runtime dependencies, only tooling. Pick and choose from the components below that may be useful depending on the scope and scale or your project. They primary include additional JavaScript features and common libraries.
 
-- Genearl
-    - [Webpack Plugins](#plugins)
+- [General](#general)
+    - [Webpack Plugins](#webpack-plugins)
     - [ES2015 Experimental](#es2015-experimental)
-- Polyfills
+- [Polyfills](#polyfills)
     - [ES2015 (general)](#es2015-polyfill)
     - [Fetch](#fetch-polyfill)
     - [Promise](#promise-polyfill)
-- Libraries
+- [Libraries](#libraries)
     - [React](#react)
     - [Redux](#redux)
-    - 
 
 ### General
 
@@ -84,7 +83,7 @@ npm install --save-dev \
 
 Update the `.babelrc` to include the additional plugins:
 
-```
+```json
 {
   "presets": [
     "es2015"
@@ -99,7 +98,7 @@ Update the `.babelrc` to include the additional plugins:
 
 ### Polyfills
 
-#### ES2015 Pollyfill
+#### ES2015 Polyfill
 
 As of version 6, Babel now only does syntax transformations based on the loaders enabled. This enables using ES2015 syntax, but does not actually provide any of the modules in ES2015 itself like Promise, Set, or Map. For this the [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) must be installed.
 
@@ -188,7 +187,7 @@ npm install --save \
 
 Add the `react` Babel preset to the `.babelrc` file.
 
-```
+```json
 {
   "presets": [
     "es2015",
