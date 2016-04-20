@@ -28,29 +28,47 @@ npm run serve
 
 Open a Web browser to [http://localhost:8080](http://localhost:8080). Open the developer tools for the browser as well to see console messages regarding the Hot Module Reload.
 
-## Customize
+## Guide
 
 By default, this starter kit comes which no runtime dependencies, only tooling. Pick and choose from the components below that may be useful depending on the scope and scale or your project. They primary include additional JavaScript features and common libraries.
 
-### ES2015 Pollyfill
+- [General](#general)
+    - [Webpack Plugins](#webpack-plugins)
+    - [ES2015 Experimental](#es2015-experimental)
+- [Polyfills](#polyfills)
+    - [ES2015 (general)](#es2015-polyfill)
+    - [Fetch](#fetch-polyfill)
+    - [Promise](#promise-polyfill)
+- [Libraries](#libraries)
+    - [React](#react)
+    - [Redux](#redux)
+    - [React Router](#react-router)
 
-As of version 6, Babel now only does syntax transformations based on the loaders enabled. This enables using ES2015 syntax, but does not actually provide any of the modules in ES2015 itself like Promise, Set, or Map. For this the [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) must be installed.
+### General
 
-#### Install
+#### Webpack Plugins
+
+##### Install
 
 ```
-npm install --save-dev babel-polyfill
+npm install --save-dev \
+    exports-loader \
+    imports-loader
 ```
 
-#### Setup
-
-This must be included in modules that use these features:
+##### Setup
 
 ```js
-import 'babel-polyfill'
+// Ensure webpack is imported.
+import webpack from 'webpack'
+
+// Add this plugins option in the configuration object.
+plugins: [
+    // plugins go here...
+]
 ```
 
-### ES2015 Experimental Features
+### ES2015 Experimental
 
 Babel provides [two presets](https://babeljs.io/docs/plugins/#presets) with the stable features in ES2015. However there are a variety of other [plugins for experimental features](https://babeljs.io/docs/plugins/). Two recommended syntax plugins are [class properties](http://babeljs.io/docs/plugins/syntax-class-properties/) and the [object rest spread](http://babeljs.io/docs/plugins/syntax-object-rest-spread/) syntax.
 
@@ -66,7 +84,7 @@ npm install --save-dev \
 
 Update the `.babelrc` to include the additional plugins:
 
-```
+```json
 {
   "presets": [
     "es2015"
@@ -79,17 +97,86 @@ Update the `.babelrc` to include the additional plugins:
 }
 ```
 
-### React
+### Polyfills
 
-[React](https://facebook.github.io/react/) is a relatively sophisticated library for building user interfaces.
+#### ES2015 Polyfill
+
+As of version 6, Babel now only does syntax transformations based on the loaders enabled. This enables using ES2015 syntax, but does not actually provide any of the modules in ES2015 itself like Promise, Set, or Map. For this the [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) must be installed.
+
+##### Install
+
+```
+npm install --save-dev babel-polyfill
+```
+
+##### Setup
+
+This must be included in modules that use these features:
+
+```js
+import 'babel-polyfill'
+```
+
+#### Fetch Polyfill
+
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is a [new standard](https://fetch.spec.whatwg.org/) for requests and responses in the browser.
+
+Currently, Chrome and Firefox support the new API, but IE and Safari do not. This is a polyfill that can be implicitly added through a Webpack loader.
+
+##### Dependencies
+
+- [Webpack plugins](#webpack-plugins)
 
 #### Install
 
 ```
+npm install --save whatwg-fetch
+```
+
+#### Setup
+
+Add this to the `plugins` array in the Webpack config.
+
+```js
+new webpack.ProvidePlugin({
+   'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+})
+```
+
+#### Promise Polyfill
+
+##### Dependencies
+
+- [Webpack plugins](#webpack-plugins)
+
+#### Install
+
+```
+npm install --save es6-polyfill
+```
+
+#### Setup
+
+Make the following changes to the `webpack.config.babel.js` file.
+
+```js
+new webpack.ProvidePlugin({
+   'promise': 'imports?this=>global!exports?global.Promise!es6-promise'
+})
+```
+
+### Libraries
+
+#### React
+
+[React](https://facebook.github.io/react/) is a relatively sophisticated library for building user interfaces.
+
+##### Install
+
+```
 # Development
 npm install --save-dev \
-  babel-preset-react \
-  react-hot-loader 
+  babel-preset-react
 
 # Runtime
 npm install --save \
@@ -97,9 +184,18 @@ npm install --save \
   react-dom 
 ```
 
-#### Setup
+##### Setup
 
-Add `react` to the `.babelrc` `presets` array.
+Add the `react` Babel preset to the `.babelrc` file.
+
+```json
+{
+  "presets": [
+    "es2015",
+    "react"
+  ]
+}
+```
 
 Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It must be the first loader so the state of the components can saved prior to recompilation.
 
@@ -111,20 +207,9 @@ Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It
 }
 ```
 
-*For the future, this plugin is being phased out by another, but it is not yet stable: https://github.com/gaearon/babel-plugin-react-transform/.*
+*From the author: "However if you do use something like Redux, I strongly suggest you to consider using vanilla HMR API instead of React Hot Loader, React Transform, or other similar projects. It’s just so much simpler—at least, it is today."*
 
-Add the `react` Babel preset to the `.babelrc` file.
-
-```
-{
-  "presets": [
-    "es2015",
-    "react"
-  ]
-}
-```
-
-#### Example
+##### Example
 
 This could replace `main.js` as the top-level component to render in the `#main` element.
 
@@ -143,15 +228,15 @@ ReactDOM.render(
 )
 ```
 
-#### Other
+##### Other
 
 [React Developer Tools](https://chrome.google.com/webstore/detail/fmkadmapgofadopljbjfkapdkoienihi) is a Chrome Extension that adds a panel to the Developer Tools.
 
-### Redux
+#### Redux
 
 [Redux](http://redux.js.org/) is a "predictable state container for JavaScript apps." 
 
-#### Install
+##### Install
 
 ```
 npm install --save \
@@ -159,66 +244,26 @@ npm install --save \
   redux-react
 ```
 
-#### Example
+##### Example
 
-There are several parts to Redux, so it recommended to read through the documentation available at http://redux.js.org/.
+There are several parts to Redux, so it is recommended to read through the documentation available here: http://redux.js.org/.
 
-#### Other
+##### Other
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome extension that wraps most of the functionality provided in the [native redux-devtools library](https://github.com/gaearon/redux-devtools) without needing to instrument your code directly.
 
-### React Router
+#### React Router
 
-#### Install
+[React Router](https://github.com/reactjs/react-router) is a routing library for React.
 
-```
-npm install --save react-router
-```
-
-#### Code
-
-```js
+##### Install
 
 ```
-
-#### Example
-
-
-### Fetch Polyfill
-
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is a [new standard](https://fetch.spec.whatwg.org/) for requests and responses in the browser.
-
-Currently, Chrome and Firefox support the new API, but IE and Safari do not. This is a polyfill that can be implicitly added through a Webpack loader.
-
-#### Install
-
-```
-# For webpack
-npm install --save-dev \
-    exports-loader \
-    imports-loader
-
-npm install --save whatwg-fetch
+npm install --save \
+    react-router \
+    react-router-redux
 ```
 
-#### Setup
+##### Example
 
-Make the following changes to the `webpack.config.babel.js` file.
-
-```js
-// Ensure webpack is imported.
-import webpack from 'webpack'
-
-// Add this plugins option in the configuration object.
-plugins: [
-    new webpack.ProvidePlugin({
-       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-       // other polyfills can be added here as well
-    })
-    // other plugins..
-]
-```
-
-## Credits
-
-- https://robots.thoughtbot.com/setting-up-webpack-for-react-and-hot-module-replacement
+There are several parts to React Router, so it is recommended to read through the documentation available here: https://github.com/reactjs/react-router/tree/master/docs#table-of-contents
