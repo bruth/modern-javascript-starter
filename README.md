@@ -35,6 +35,7 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
 - [General](#general)
     - [Webpack Plugins](#webpack-plugins)
     - [ES2015 Experimental](#es2015-experimental)
+    - [CSS Bundling](#css-bundling)
 - [Polyfills](#polyfills)
     - [ES2015 (general)](#es2015-polyfill)
     - [Fetch](#fetch-polyfill)
@@ -43,7 +44,6 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
     - [React](#react)
     - [Redux](#redux)
     - [React Router](#react-router)
-    - [CSS Bundling](#css-bundling)
 
 ### General
 
@@ -72,6 +72,87 @@ plugins: [
 ### ES2015 Experimental
 
 Babel provides [two presets](https://babeljs.io/docs/plugins/#presets) with the stable features in ES2015. However there are a variety of other [plugins for experimental features](https://babeljs.io/docs/plugins/). Two recommended syntax plugins are [class properties](http://babeljs.io/docs/plugins/syntax-class-properties/) and the [object rest spread](http://babeljs.io/docs/plugins/syntax-object-rest-spread/) syntax.
+
+
+#### CSS Bundling
+
+With Webpack, it's possible to bundle separate stylesheets together into a single
+unified sheet that is used by your app, much like it does with separate Javascript files.  
+This allows you to isolate and more easily manage the styling of each component of your app.  
+In order to get CSS bundling up and working, we'll need to install a few more libraries.
+
+##### CSS Loader, Style Loader
+
+The Webpack CSS Loader takes all of your separate CSS files and bundles them into a single
+CSS file that can style your entire application.  Style Loader takes this file and injects it into
+a style tag in the rendered page.  First, install the libraries:
+
+```
+npm install --save-dev \
+  css-loader \
+  style-loader
+```
+
+Next, update the loaders section in your Webpack config file:
+
+```js
+module: {
+  loaders: [
+    // The CSS loader allows for webpack to compile CSS stylesheets into a
+    // single sheet.  The 'localIdentName=[name]__[local]___[hash:base64:5]'
+    // gives each CSS selector a unique name to avoid naming conflicts.
+    {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+    }
+    // and other loaders
+  ]
+}
+```
+
+##### Extract Text Plugin
+If you're deploying an app to production, you'll want an actual CSS file as output
+from a bundler.  This can be accomplished with the Extract Text Plugin.
+
+Install:
+```
+npm install --save-dev extract-text-webpack-plugin
+```
+
+Update Webpack config:
+
+```js
+
+import ExtractTextPlugin from "extract-text-webpack-plugin"
+
+// Add publicPath to serve files on the dev server
+output: {
+  path: __dirname + "/dist",
+  filename: "bundle.js",
+  publicPath: "/static/"
+},
+
+// add ExtractText to plugins
+plugins: [
+  new ExtractTextPlugin('bundle.css', { allChunks: true }),
+]
+
+// Update your CSS loader in loaders
+{
+  test: /\.css$/,
+  loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
+}
+
+```
+
+We can create this single CSS file in by running the `npm run build` command.
+This file can now be include in your document:
+
+```html
+<head>
+  <link rel="stylesheet" type="text/css" href="bundle.css">
+</head>
+```
 
 #### Install
 
@@ -268,84 +349,3 @@ npm install --save \
 ##### Example
 
 There are several parts to React Router, so it is recommended to read through the documentation available here: https://github.com/reactjs/react-router/tree/master/docs#table-of-contents
-
-[](#css-bundling)
-#### CSS Bundling
-
-With Webpack, it's possible to bundle separate stylesheets together into a single
-unified sheet that is used by your app, much like it does with separate Javascript files.  
-This allows you to isolate and more easily manage the styling of each component of your app.  
-In order to get CSS bundling up and working, we'll need to install a few more libraries.
-
-##### CSS Loader, Style Loader
-
-The Webpack CSS Loader takes all of your separate CSS files and bundles them into a single
-CSS file that can style your entire application.  Style Loader takes this file and injects it into
-a style tag in the rendered page.  First, install the libraries:
-
-```
-npm install --save-dev \
-  css-loader \
-  style-loader
-```
-
-Next, update the loaders section in your Webpack config file:
-
-```js
-module: {
-  loaders: [
-    // The CSS loader allows for webpack to compile CSS stylesheets into a
-    // single sheet.  The 'localIdentName=[name]__[local]___[hash:base64:5]'
-    // gives each CSS selector a unique name to avoid naming conflicts.
-    {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-    }
-    // and other loaders
-  ]
-}
-```
-
-##### Extract Text Plugin
-If you're deploying an app to production, you'll want an actual CSS file as output
-from a bundler.  This can be accomplished with the Extract Text Plugin.
-
-Install:
-```
-npm install --save-dev extract-text-webpack-plugin
-```
-
-Update Webpack config:
-
-```js
-
-import ExtractTextPlugin from "extract-text-webpack-plugin"
-
-// Add publicPath to serve files on the dev server
-output: {
-  path: __dirname + "/dist",
-  filename: "bundle.js",
-  publicPath: "/static/"
-},
-
-// add ExtractText to plugins
-plugins: [
-  new ExtractTextPlugin('bundle.css', { allChunks: true }),
-]
-
-// Update your CSS loader in loaders
-{
-  test: /\.css$/,
-  loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
-}
-
-```
-
-We can create this single CSS file in by running the `npm run build` command.
-This file can now be include in your document:
-
-```html
-<head>
-  <link rel="stylesheet" type="text/css" href="bundle.css">
-</head>
-```
