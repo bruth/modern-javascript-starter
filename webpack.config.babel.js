@@ -30,7 +30,6 @@ export default {
         test: /\.html$/,
         loader: "file?name=[name].[ext]"
       },
-
     ]
   }
 }

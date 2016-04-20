@@ -241,7 +241,7 @@ ReactDOM.render(
 ```
 npm install --save \
   redux \
-  redux-react
+  react-redux
 ```
 
 ##### Example
