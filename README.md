@@ -74,6 +74,31 @@ plugins: [
 Babel provides [two presets](https://babeljs.io/docs/plugins/#presets) with the stable features in ES2015. However there are a variety of other [plugins for experimental features](https://babeljs.io/docs/plugins/). Two recommended syntax plugins are [class properties](http://babeljs.io/docs/plugins/syntax-class-properties/) and the [object rest spread](http://babeljs.io/docs/plugins/syntax-object-rest-spread/) syntax.
 
 
+#### Install
+
+```
+npm install --save-dev \
+  babel-plugin-transform-class-properties \
+  babel-plugin-transform-object-rest-spread
+```
+
+#### Setup
+
+Update the `.babelrc` to include the additional plugins:
+
+```json
+{
+  "presets": [
+    "es2015"
+  ],
+
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
+}
+```
+
 #### CSS Bundling
 
 With Webpack, it's possible to bundle separate stylesheets together into a single
@@ -122,7 +147,6 @@ npm install --save-dev extract-text-webpack-plugin
 Update Webpack config:
 
 ```js
-
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 // Add publicPath to serve files on the dev server
@@ -152,31 +176,6 @@ This file can now be include in your document:
 <head>
   <link rel="stylesheet" type="text/css" href="bundle.css">
 </head>
-```
-
-#### Install
-
-```
-npm install --save-dev \
-  babel-plugin-transform-class-properties \
-  babel-plugin-transform-object-rest-spread
-```
-
-#### Setup
-
-Update the `.babelrc` to include the additional plugins:
-
-```json
-{
-  "presets": [
-    "es2015"
-  ],
-
-  "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread"
-  ]
-}
 ```
 
 ### Polyfills
