@@ -309,7 +309,7 @@ ReactDOM.render(
 )
 ```
 
-##### Other
+##### Add-ons
 
 [React Developer Tools](https://chrome.google.com/webstore/detail/fmkadmapgofadopljbjfkapdkoienihi) is a Chrome Extension that adds a panel to the Developer Tools.
 
@@ -329,9 +329,25 @@ npm install --save \
 
 There are several parts to Redux, so it is recommended to read through the documentation available here: http://redux.js.org/.
 
-##### Other
+##### Add-ons
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome extension that wraps most of the functionality provided in the [native redux-devtools library](https://github.com/gaearon/redux-devtools) without needing to instrument your code directly.
+
+A common oversight when defining actions is implementing a reducer function (or logic) for that action. [Redux Unhandled Action](https://github.com/socialtables/redux-unhandled-action) is a small bit of *middleware* that compares the before and after state after a action is handled to determine if the state changed. If it does not then an error is logged to the console to note which action went unhandled.
+
+```bash
+npm install --save redux-unhandled-action
+```
+
+The middleware is applied when creating the store.
+
+```javascript
+import { createStore, applyMiddleware } from 'redux'
+import unhandledAction from 'redux-unhandled-action'
+import rootReducer from './reducer'
+
+const store = createStore(rootReducer, applyMiddleware(unhandledAction()))
+```
 
 #### React Router
 
