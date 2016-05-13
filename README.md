@@ -23,7 +23,7 @@ npm install
 Start the webpack server by running:
 
 ```
-npm run serve
+npm start
 ```
 
 Open a Web browser to [http://localhost:8080](http://localhost:8080). Open the developer tools for the browser as well to see console messages regarding the Hot Module Reload.
@@ -58,6 +58,7 @@ npm install --save-dev \
 ```
 
 ##### Setup
+Add the following code to the `webpack.config.babel.js` file as specified in the comments.
 
 ```js
 // Ensure webpack is imported.
