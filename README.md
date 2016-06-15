@@ -279,7 +279,7 @@ Add the `react` Babel preset to the `.babelrc` file.
 }
 ```
 
-Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It must be the first loader so the state of the components can saved prior to recompilation.
+Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It must be the first loader so the state of the components can be saved prior to recompilation.
 
 ```js
 {
