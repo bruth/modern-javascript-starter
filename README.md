@@ -234,7 +234,7 @@ new webpack.ProvidePlugin({
 #### Install
 
 ```
-npm install --save es6-polyfill
+npm install --save es6-promise
 ```
 
 #### Setup
