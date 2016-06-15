@@ -33,7 +33,7 @@ Open a Web browser to [http://localhost:8080](http://localhost:8080). Open the d
 By default, this starter kit comes which no runtime dependencies, only tooling. Pick and choose from the components below that may be useful depending on the scope and scale or your project. They primary include additional JavaScript features and common libraries.
 
 - [General](#general)
-    - [Webpack Plugins](#webpack-plugins)
+    - [Webpack Loaders](#webpack-loaders)
     - [ES2015 Experimental](#es2015-experimental)
     - [CSS Bundling](#css-bundling)
 - [Polyfills](#polyfills)
@@ -47,7 +47,7 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
 
 ### General
 
-#### Webpack Plugins
+#### Webpack Loaders
 
 ##### Install
 
@@ -207,7 +207,7 @@ Currently, Chrome and Firefox support the new API, but IE and Safari do not. Thi
 
 ##### Dependencies
 
-- [Webpack plugins](#webpack-plugins)
+- [Webpack `imports` Loader](#webpack-loaders)
 
 #### Install
 
@@ -229,7 +229,7 @@ new webpack.ProvidePlugin({
 
 ##### Dependencies
 
-- [Webpack plugins](#webpack-plugins)
+- [Webpack `imports` Loader](#webpack-loaders)
 
 #### Install
 
