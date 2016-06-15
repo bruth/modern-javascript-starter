@@ -44,6 +44,7 @@ By default, this starter kit comes which no runtime dependencies, only tooling. 
     - [React](#react)
     - [Redux](#redux)
     - [React Router](#react-router)
+    - [Redux Thunk](#redux-thunk)
 
 ### General
 
@@ -353,3 +354,13 @@ npm install --save \
 ##### Example
 
 There are several parts to React Router, so it is recommended to read through the documentation available here: https://github.com/reactjs/react-router/tree/master/docs#table-of-contents
+
+#### Redux Thunk
+
+[Redux Thunk](https://github.com/gaearon/redux-thunk) "allows you to write action creators that return a function instead of an action." Read the [motivation](https://github.com/gaearon/redux-thunk#motivation) for an in-depth example.
+
+#### Install
+
+```
+npm install --save redux-thunk
+```
