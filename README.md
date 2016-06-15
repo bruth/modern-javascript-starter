@@ -10,6 +10,8 @@ The goal of this repository is to provide only the necessary code and configurat
 
 Look at [main.js](./src/main.js) and [index.html](./src/index.html). It that feels *lame*, it should. Look below for how to customize it to your needs.
 
+The [boilerplate branch](https://github.com/bruth/modern-javascript-starter/tree/boilerplate) includes most of the libraries listed below along with the code necessary to string it all together.
+
 ## Setup
 
 Since everything is driven by short guides, it is recommended to simply download the [zip file](https://github.com/bruth/modern-javascript-starter/archive/master.zip) of the repository.
