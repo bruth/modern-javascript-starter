@@ -1,3 +1,5 @@
+import webpack from 'webpack'
+
 export default {
   // Entrypoint of the application. It is named main since that
   // is most common in other programming environments.
@@ -12,6 +14,16 @@ export default {
     path: __dirname + "/dist",
     filename: "bundle.js"
   },
+
+  plugins: [
+		new webpack.ProvidePlugin({
+			 'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+		}),
+
+		new webpack.ProvidePlugin({
+			 'promise': 'imports?this=>global!exports?global.Promise!es6-promise'
+		})
+  ],
 
   // Each file that is processed can be optionally handled by a 'loader'
   // which acts as a preprocessor.
