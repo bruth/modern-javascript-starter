@@ -279,15 +279,6 @@ Add the `react` Babel preset to the `.babelrc` file.
 }
 ```
 
-Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It must be the first loader so the state of the components can be saved prior to recompilation.
-
-```js
-{
-  text: /\.js$/,
-  exclude: /node_modules/
-}
-```
-
 ##### Example
 
 This could replace `main.js` as the top-level component to render in the `#main` element.
