@@ -103,8 +103,8 @@ Update the `.babelrc` to include the additional plugins:
 #### CSS Bundling
 
 With Webpack, it's possible to bundle separate stylesheets together into a single
-unified sheet that is used by your app, much like it does with separate Javascript files.  
-This allows you to isolate and more easily manage the styling of each component of your app.  
+unified sheet that is used by your app, much like it does with separate Javascript files.
+This allows you to isolate and more easily manage the styling of each component of your app.
 In order to get CSS bundling up and working, we'll need to install a few more libraries.
 
 ##### CSS Loader, Style Loader
@@ -284,12 +284,9 @@ Prepend the following to `module.loaders` array of `webpack.config.babel.js`. It
 ```js
 {
   text: /\.js$/,
-  exclude: /node_modules/,
-  loader: "react-hot"
+  exclude: /node_modules/
 }
 ```
-
-*From the author: "However if you do use something like Redux, I strongly suggest you to consider using vanilla HMR API instead of React Hot Loader, React Transform, or other similar projects. It’s just so much simpler—at least, it is today."*
 
 ##### Example
 
