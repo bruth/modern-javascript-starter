@@ -1,5 +1,7 @@
 # Modern JavaScript Starter
 
+[![Dependency Status](https://david-dm.org/bruth/modern-javascript-starter.svg?style=flat-square)](https://david-dm.org/bruth/modern-javascript-starter) [![devDependency Status](https://david-dm.org/bruth/modern-javascript-starter/dev-status.svg?style=flat-square)](https://david-dm.org/bruth/modern-javascript-starter#info=devDependencies)
+
 This includes a very minimal setup for starting a *modern* JavaScript project. At this time (and my opinion), *modern* involves using [ES2015](https://babeljs.io/docs/learn-es2015/) syntax and language features and [Webpack](https://webpack.github.io/), a very fast and flexible build tool with "no setup" [hot module replacement](https://github.com/webpack/docs/wiki/hot-module-replacement-with-webpack).
 
 Although most browsers do not support ES2015 (also referred to as ES6), a tool called [Babel](https://babeljs.io) is available to transpile ES6 code back to ES5/4 syntax and features. This enables you the developer to learn and take advantage of the new language and features without needing to wait for browsers to implement everything.
