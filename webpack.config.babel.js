@@ -1,3 +1,7 @@
+// Host and port
+const HOST = process.env.HOST || '127.0.0.1'
+const PORT = process.env.PORT || 3000
+
 export default {
   // Entrypoint of the application. It is named main since that
   // is most common in other programming environments.
@@ -11,6 +15,11 @@ export default {
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js"
+  },
+
+  devServer: {
+    host: HOST,
+    port: PORT
   },
 
   // Each file that is processed can be optionally handled by a 'loader'
