@@ -1,6 +1,12 @@
 import webpack from 'webpack'
 
+// Host and port
+const HOST = process.env.HOST || '127.0.0.1'
+const PORT = process.env.PORT || 3000
+
 export default {
+  devtool: 'eval',
+
   // Entrypoint of the application. It is named main since that
   // is most common in other programming environments.
   entry: [
@@ -13,6 +19,11 @@ export default {
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js"
+  },
+
+  devServer: {
+    host: HOST,
+    port: PORT
   },
 
   plugins: [
